@@ -1,22 +1,7 @@
 ﻿/* get our header font from google*/
 @import url('https://fonts.googleapis.com/css?family=Lobster');
 
-#EventsSearchBlock {
-        position: absolute;       
-        background: rgba(211, 211, 211, 0.9);
-        
-        padding: 1em;
-        border-radius: 0.25em;
-    }
-
-#EventsSearchBlock .input-group {
-    opacity: 1;
-}
-
-h2 {
-    font-family: 'Lobster', cursive;
-}
-
+/* Events.chtml */
 @media (max-width: 768px) {
     #EventsSearchBlock {
         top: 1em;
@@ -28,4 +13,31 @@ h2 {
         top: 10em;
     }
 }
+
+#EventsSearchBlock {
+    position: absolute;       
+    background: rgba(240, 240, 240, 0.9);
+        
+    font-family: 'Lobster', cursive;
+    padding: 1em;
+    border-radius: 0.25em;
+
+    user-select: none;
+    -webkit-user-select: none;
+            
+
+    -webkit-box-shadow: 0px 0px 40px 6px rgba(98,98,98,0.88);
+    -moz-box-shadow: 0px 0px 40px 6px rgba(98,98,98,0.88);
+    box-shadow: 0px 0px 40px 6px rgba(98,98,98,0.88);
+}
+
+#EventsSearchBlock h2 {
+    margin-top: 0.25em;
+}
+
+#EventsSearchBlock .input-group {
+    opacity: 1;    
+}
+
+
 
