@@ -1,6 +1,7 @@
 ﻿@media (max-width: 768px) {
     #EventsSearchBlock {
         top: 1em;
+		margin-right: 15px; /* fixing bootstrap row*/
     }
 }
 
@@ -17,20 +18,17 @@
     font-family: 'Lobster', cursive;
     padding: 1em;
     border-radius: 0.25em;
-
     user-select: none;
     -webkit-user-select: none;
-            
-
     -webkit-box-shadow: 0px 0px 40px 6px rgba(98,98,98,0.88);
     -moz-box-shadow: 0px 0px 40px 6px rgba(98,98,98,0.88);
     box-shadow: 0px 0px 40px 6px rgba(98,98,98,0.88);
-}
 
-#EventsSearchBlock h2 {
-    margin-top: 0.25em;
-}
+	h2 {
+		margin-top: 0.25em;
+	}
 
-#EventsSearchBlock .input-group {
-    opacity: 1;    
+	.input-group {
+		opacity: 1;    
+	}
 }
