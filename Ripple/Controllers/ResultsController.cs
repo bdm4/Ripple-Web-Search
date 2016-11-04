@@ -11,6 +11,14 @@ namespace Ripple.Controllers
         // GET: Results
         public ActionResult Index()
         {
+            int i = 0;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Index(string search)
+        {
+            int i = 0;
             return View();
         }
     }
