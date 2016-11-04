@@ -1,0 +1,35 @@
+{
+  "name": "ripple",
+  "version": "1.0.0",
+  "description": "This is a demonstration for Ripple Web",
+  "main": "gulpconfig.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bdm4/Ripple-Web-Search/"
+  },
+  "author": "Ben Margevicius",
+  "devDependencies": {
+    "bootstrap": "^3.3.7",
+    "chalk": "^1.1.1",
+    "del": "^2.2.2",
+    "font-awesome": "^4.6.1",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-header": "^1.8.8",
+    "gulp-if": "^2.0.0",
+    "gulp-insert": "^0.5.0",
+    "gulp-jshint": "^2.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-replace": "^0.5.4",
+    "gulp-sass": "^2.3.2",
+    "gulp-sourcemaps": "^2.2.0",
+    "gulp-uglify": "^2.0.0",
+    "jquery": "^3.1.1",
+    "jquery-ui": "^1.12.1",
+    "jshint": "^2.9.3",
+    "jshint-stylish": "^2.2.1"
+  }
+}
