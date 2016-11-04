@@ -169,6 +169,8 @@
     <Compile Include="Controllers\DetailsController.cs" />
     <Compile Include="Controllers\ResultsController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
+    <Compile Include="DAL\EventsContext.cs" />
+    <Compile Include="DAL\Interfaces\IEventsContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -249,6 +251,7 @@
     <Content Include="Views\Results\Index.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Shared\_EventsSearchForm.cshtml" />
+    <Content Include="Views\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
