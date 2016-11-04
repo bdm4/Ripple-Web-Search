@@ -11,6 +11,7 @@ namespace Ripple.Controllers
 {
     public class ResultsController : Controller
     {
+        #region ctor
         private IEventsContext db;
 
         public ResultsController()
@@ -21,6 +22,7 @@ namespace Ripple.Controllers
         {
             db = context;
         }
+        #endregion
 
         // GET: Results
         public ActionResult Index()
@@ -32,7 +34,7 @@ namespace Ripple.Controllers
         [HttpPost]
         public ActionResult Index(string search)
         {
-            var events = db.GetEvents;
+            var events = db.GetEvents; //Because of the nature of our datasource we need a getter. 
             var searchresults = events.Where(a => a.Description.Contains(search)).Select(a => a);
             
             ViewBag.SearchTerm = search;
