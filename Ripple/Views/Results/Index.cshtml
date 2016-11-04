@@ -2,6 +2,10 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Index</h2>
+    
+<div id="ResultsSearchBlock">
+    <a href="@Url.Action("Index", "Search")" class="search-header">Events Search</a> 
+    
+    @Html.Partial("~/Views/Shared/_EventsSearchForm.cshtml")
+</div>
 

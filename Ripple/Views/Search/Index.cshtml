@@ -18,16 +18,8 @@
 
 <div class="row">
     <div class="col-sm-6 col-sm-offset-3">
-        <div id="EventsSearchBlock">
-            <h2>Events Search</h2>
-            <form action="~/Views/Results/Index.cshtml" method="post">
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search Events...">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default" type="button"><span class="fa fa-search"></span></button>
-                    </span>
-                </div><!-- /input-group -->
-            </form>
+        <div id="EventsSearchBlock">            
+            @Html.Partial("~/Views/Shared/_EventsSearchForm.cshtml")
         </div>
     </div>
 </div>

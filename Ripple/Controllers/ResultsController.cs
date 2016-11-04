@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Ripple.Models;
 
 namespace Ripple.Controllers
 {
@@ -10,15 +11,18 @@ namespace Ripple.Controllers
     {
         // GET: Results
         public ActionResult Index()
-        {
-            int i = 0;
+        {           
+            ViewBag.SearchTerm = null;
             return View();
         }
 
         [HttpPost]
         public ActionResult Index(string search)
         {
-            int i = 0;
+            
+
+
+            ViewBag.SearchTerm = search;
             return View();
         }
     }
