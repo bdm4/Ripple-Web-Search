@@ -1,1 +1,27 @@
-﻿
+﻿/* get our header font from google*/
+@import url('https://fonts.googleapis.com/css?family=Lobster');
+
+#EventsSearchBlock {
+        position: absolute;       
+        background: rgba(211, 211, 211, 0.96);
+        
+        padding: 1em;
+        border-radius: 0.25em;
+    }
+
+h2 {
+    font-family: 'Lobster', cursive;
+}
+
+@media (max-width: 768px) {
+    #EventsSearchBlock {
+        top: 1em;
+    }
+}
+
+@media (min-width: 768px) {
+    #EventsSearchBlock {
+        top: 10em;
+    }
+}
+
