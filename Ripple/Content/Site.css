@@ -3,11 +3,15 @@
 
 #EventsSearchBlock {
         position: absolute;       
-        background: rgba(211, 211, 211, 0.96);
+        background: rgba(211, 211, 211, 0.9);
         
         padding: 1em;
         border-radius: 0.25em;
     }
+
+#EventsSearchBlock .input-group {
+    opacity: 1;
+}
 
 h2 {
     font-family: 'Lobster', cursive;
