@@ -182,6 +182,7 @@
     <Content Include="Components\scripts\search.details.js" />
     <Content Include="Components\scripts\search.onready.js" />
     <Content Include="Components\scripts\search.results.js" />
+    <None Include="Components\scss\_searchview.scss" />
     <Content Include="Content\scripts\search-master.js" />
     <Content Include="Content\styles\search-master.css" />
     <Content Include="favicon.ico" />
@@ -217,6 +218,9 @@
     <Content Include="Libs\font-awesome\fonts\FontAwesome.otf" />
     <Content Include="Libs\jquery\jquery.min.map" />
     <Content Include="Libs\jquery\jquery.slim.min.map" />
+    <Content Include="Components\scss\_variables.scss" />
+    <Content Include="Components\scss\_fonts.scss" />
+    <Content Include="Components\scss\_base.scss" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="gulpconfig.js" />
     <Content Include="gulpfile.js" />
