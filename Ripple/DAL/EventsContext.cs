@@ -9,10 +9,17 @@ using Ripple.DAL.Interfaces;
 
 namespace Ripple.DAL
 {
+    /// <summary>
+    /// This is a simple implementation of a data context. We have to get our data in from a flat file that has json data in it. 
+    /// We'll read that file in and serialize it to something queryable.
+    /// </summary>
     public class EventsContext : IEventsContext
     {
         private IEnumerable<Events> _Events;
 
+        /// <summary>
+        /// The contructor will read in from the flat file and serialize it to a list.
+        /// </summary>
         public EventsContext()
         {
             _Events = new List<Events>();
