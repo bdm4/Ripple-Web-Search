@@ -4,9 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-
+       
+    <link href="~/Libs/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/Libs/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="~/Content/styles/search-master.css" rel="stylesheet" />
     @RenderSection("styles", required: false)
 </head>
 <body>
@@ -14,9 +15,11 @@
     <div class="container">
         @RenderBody()    
     </div>
+    
+    <script src="~/Libs/jquery/jquery.min.js"></script>
+    <script src="~/Libs/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/Content/scripts/search-master.js"></script>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
 </html>
