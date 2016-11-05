@@ -27,12 +27,12 @@ namespace Ripple.Controllers
         }
         #endregion
        
-        public ActionResult Index(string search)
+        public ActionResult View(int id)
         {            
-            var searchresults = EventsDBContext.Events.Where(a => a.Description.Contains(search)).Select(a => a);
-
-            ViewBag.SearchTerm = search;
-            return View(searchresults);
+            var evnt = EventsDBContext.Events.ElementAt(id);
+            return View(evnt);
         }
+
+
     }
 }

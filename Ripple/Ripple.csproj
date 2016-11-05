@@ -248,11 +248,11 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Details\Index.cshtml" />
     <Content Include="Views\Results\Index.cshtml" />
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Shared\_EventsSearchForm.cshtml" />
     <Content Include="Views\View.cshtml" />
+    <Content Include="Views\Details\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
