@@ -3,75 +3,78 @@
 @{
     ViewBag.Title = "Index";
 }
-    
-<div id="ResultsSearchBlock">
-    @Html.Partial("~/Views/Shared/_EventsSearchForm.cshtml")
-</div>
+<div class="floating-content-block">
 
-<a id="AdvancedSearchLink" href="#AdvancedSearchForm" data-toggle="collapse">Filter Results</a>
-<div id="AdvancedSearchForm" class="collapse">
-    @using (@Html.BeginForm("Index", "Results", FormMethod.Post, new { @class = "form-horizontal" }))
-    {
-        <input type="hidden" name="Search" value="@ViewBag.SearchTerm" />
-        <div class="form-group">
-            <label for="CatTxt" class="col-sm-1 control-label">Category</label>
-            <div class="col-sm-11">
-                <input type="text" name="Category" id="CatTxt" value="@ViewBag.Category"  />
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="StartDateTxt" class="col-sm-1 control-label">Start Date</label>
-            <div class="col-sm-11">
-                <input type="text" name="StartDate" id="StartDateTxt" value="@ViewBag.StartDate" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="EndDateTxt" class="col-sm-1 control-label">End Date</label>
-            <div class="col-sm-11">
-                <input type="text" name="EndDate" id="EndDateTxt" value="@ViewBag.EndDate" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="CityTxt" class="col-sm-1 control-label">City</label>
-            <div class="col-sm-11">
-                <input type="text" name="City" id="CityTxt" value="@ViewBag.City" />
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="VenueTxt" class="col-sm-1 control-label">Venue</label>
-            <div class="col-sm-11">
-                <input type="text" name="Venue" id="VenueTxt" value="@ViewBag.Venue" />
-            </div>
-        </div>
-        <button class="btn btn-default" type="submit">Filter Results</button>
-    }
-</div>
-<hr />
-
-@if (Model != null && Model.Count() > 0)
-{
-    for (int key = 0; key < Model.Count(); key++)
-    {
-        var evnt = Model.ElementAt(key);
-    <div class="media">
-        <div class="media-left">
-            <a href="@Url.Action("Index", "Details", new { id = key })">                
-                <img class="media-object" src="//placehold.it/64x64" alt="@evnt.Description" />
-            </a>
-        </div>
-        <div class="media-body">
-            <h4 class="media-heading"><a href="@Url.Action("View", "Details", new { id = key })">@evnt.Title</a></h4>
-            <p>
-                @evnt.Description
-            </p>
-        </div>
+    <div id="ResultsSearchBlock">
+        @Html.Partial("~/Views/Shared/_EventsSearchForm.cshtml")
     </div>
+
+    <a id="AdvancedSearchLink" href="#AdvancedSearchForm" data-toggle="collapse">Filter Results</a>
+    <div id="AdvancedSearchForm" class="collapse">
+        @using (@Html.BeginForm("Index", "Results", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            <input type="hidden" name="Search" value="@ViewBag.SearchTerm" />
+            <div class="form-group">
+                <label for="CatTxt" class="col-sm-1 control-label">Category</label>
+                <div class="col-sm-11">
+                    <input type="text" name="Category" id="CatTxt" value="@ViewBag.Category" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="StartDateTxt" class="col-sm-1 control-label">Start Date</label>
+                <div class="col-sm-11">
+                    <input type="text" name="StartDate" id="StartDateTxt" value="@ViewBag.StartDate" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="EndDateTxt" class="col-sm-1 control-label">End Date</label>
+                <div class="col-sm-11">
+                    <input type="text" name="EndDate" id="EndDateTxt" value="@ViewBag.EndDate" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="CityTxt" class="col-sm-1 control-label">City</label>
+                <div class="col-sm-11">
+                    <input type="text" name="City" id="CityTxt" value="@ViewBag.City" />
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="VenueTxt" class="col-sm-1 control-label">Venue</label>
+                <div class="col-sm-11">
+                    <input type="text" name="Venue" id="VenueTxt" value="@ViewBag.Venue" />
+                </div>
+            </div>
+            <button class="btn btn-default" type="submit">Filter Results</button>
+        }
+    </div>
+    <hr />
+
+    @if (Model != null && Model.Count() > 0)
+    {
+        for (int key = 0; key < Model.Count(); key++)
+        {
+            var evnt = Model.ElementAt(key);
+            <div class="media">
+                <div class="media-left">
+                    <a href="@Url.Action("View", "Details", new { Search=ViewBag.SearchTerm, StartDate = evnt.StartDate, Title = evnt.Title, Time=evnt.Time })">
+                        <img class="media-object" src="//placehold.it/64x64" alt="@evnt.Description" />
+                    </a>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading"><a href="@Url.Action("View", "Details",  new { Search = ViewBag.SearchTerm, StartDate = evnt.StartDate, Title = evnt.Title, Time=evnt.Time })">@evnt.Title</a></h4>
+                    <p>
+                        @evnt.Description
+                    </p>
+                </div>
+            </div>
+        }
     }
-}
-else
-{
-    <div>Sorry there are no results that match your search</div>
-}      
+    else
+    {
+        <div>Sorry there are no results that match your search</div>
+    }
+
+</div>   
 
 @section scripts {    
     <script src="~/Libs/jquery-maskedinput/js/jquery.maskedinput.js"></script>

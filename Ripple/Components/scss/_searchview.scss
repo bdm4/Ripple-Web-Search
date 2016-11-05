@@ -1,18 +1,13 @@
-﻿@media (max-width: 768px) {
-    #EventsSearchBlock {
-        top: 1em;   //in mobile mode add a slight margin to the top
-		margin-right: 15px; /* fixing bootstrap row*/
-    }
-}
-
-@media (min-width: 768px) {
+﻿@media (min-width: 768px) {
     #EventsSearchBlock {
         top: 10em; //if we are in tablet mode or larger move the search block down a bit
     }
 }
 
 .floating-content-block {
-    position: absolute;       
+    position: absolute;     
+    top: 1em;   //in mobile mode add a slight margin to the top  
+    margin-right: 1em;
     background: rgba(240, 240, 240, 0.9);
     padding: 1em;
     border-radius: 0.25em;

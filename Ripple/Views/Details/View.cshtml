@@ -114,7 +114,11 @@
 
     </dl>
     <p>
-        @Html.ActionLink("Back to Search", "Index", "Results")
+        @using (@Html.BeginForm("Index", "Results", FormMethod.Post, new { @class = "form-horizontal" }))
+        {
+            <input type="hidden" name="Search" value="@ViewBag.SearchTerm" />
+            <button class="btn btn-default" type="submit">Back to Results</button>
+        }       
     </p>
 </div>
 

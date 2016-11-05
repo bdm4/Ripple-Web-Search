@@ -27,12 +27,11 @@ namespace Ripple.Controllers
         }
         #endregion
        
-        public ActionResult View(int id)
-        {            
-            var evnt = EventsDBContext.Events.ElementAt(id);
+        public ActionResult View(string Search, DateTime StartDate, string Title, string Time)
+        {
+            var evnt = EventsDBContext.Events.SingleOrDefault(a => a.StartDate.Value == StartDate && a.Title == Title && a.Time == Time);
+            ViewBag.SearchTerm = Search;
             return View(evnt);
         }
-
-
     }
 }
