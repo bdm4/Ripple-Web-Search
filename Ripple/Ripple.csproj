@@ -189,7 +189,6 @@
     <Content Include="Content\styles\search-master.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="DAL\Events.json" />
     <Content Include="Components\scss\main.scss" />
     <Content Include="Libs\bootstrap\css\bootstrap-theme.css" />

@@ -37,26 +37,28 @@ namespace Ripple.Controllers
         [HttpPost]
         public ActionResult Index(string Search, Events EventFilter = null)
         {              
-            if(String.IsNullOrEmpty(Search))
-            {
-                return View();
+            if(String.IsNullOrEmpty(Search)) 
+            { 
+                return View(); //If search is empty return no results.
             }
 
+            //The search design was to be greedy with filtering available to the user. So all initial searched are by keywords in the filterable inputs.
             var searchresults = EventsDBContext.Events.Where(a => a.Description.Contains(Search) || 
                                     a.Category.Contains(Search) || 
                                     a.City.Contains(Search) || 
                                     a.Venue.Contains(Search))                                    
                                 .Select(a => a);
 
-            var service = new FilterResultsService();
+            var service = new FilterResultsService(); //This service is designed to filter results of a keywords query.
             searchresults = service.FilterResults(searchresults, EventFilter);
 
+            //We pass this back to show in the partial form view and filter form inputs.
             ViewBag.Category = EventFilter.Category;
             ViewBag.StartDate = EventFilter.StartDate;
             ViewBag.EndDate = EventFilter.EndDate;
             ViewBag.City = EventFilter.City;
             ViewBag.Venue = EventFilter.Venue;
-            ViewBag.SearchTerm = Search; //We pass this back to show in the partial form view 
+            ViewBag.SearchTerm = Search; 
             return View(searchresults);
         }
     }

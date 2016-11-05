@@ -50,17 +50,17 @@
 
 @if (Model != null && Model.Count() > 0)
 {
-    for (int i = 0; i < Model.Count(); i++)
+    for (int key = 0; key < Model.Count(); key++)
     {
-        var evnt = Model.ElementAt(i);
+        var evnt = Model.ElementAt(key);
     <div class="media">
-        <div class="media-left" data-key="@i">
-            <a href="#">
+        <div class="media-left">
+            <a href="@Url.Action("Index", "Details", new { id = key })">                
                 <img class="media-object" src="//placehold.it/64x64" alt="@evnt.Description" />
             </a>
         </div>
         <div class="media-body">
-            <h4 class="media-heading">@evnt.Title</h4>
+            <h4 class="media-heading"><a href="@Url.Action("Index", "Details", new { id = key })">@evnt.Title</a></h4>
             <p>
                 @evnt.Description
             </p>
