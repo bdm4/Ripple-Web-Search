@@ -4,3 +4,51 @@
     ViewBag.Title = "Index";
 }
     
+<div id="ResultsSearchBlock">
+    @Html.Partial("~/Views/Shared/_EventsSearchForm.cshtml")
+</div>
+
+<a id="AdvancedSearchLink" href="#AdvancedSearchForm" data-toggle="collapse">Advanced Search</a>
+<div id="AdvancedSearchForm" class="collapse">
+    <form>
+        <div class="form-group">
+            <input type="text" name="Category" />
+        </div>
+        <div class="form-group">
+            <input type="text" name="StartDate" />
+            <input type="text" name="EndDate" />
+       </div>
+        <div class="form-group">
+            <input type="text" name="City" />
+        </div>
+        <div class="form-group">
+            <input type="text" name="Venue" />
+        </div>
+</form>
+</div>
+<hr />
+
+@if (Model.Count() > 0)
+{
+    for (int i = 0; i < Model.Count(); i++)
+    {
+        var evnt = Model.ElementAt(i);
+    <div class="media">
+        <div class="media-left" data-key="@i">
+            <a href="#">
+                <img class="media-object" src="//placehold.it/64x64" alt="@evnt.Description" />
+            </a>
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading">@evnt.Title</h4>
+            <p>
+                @evnt.Description
+            </p>
+        </div>
+    </div>
+    }
+}
+else
+{
+    <div>Sorry there are no results that match your search</div>
+}      

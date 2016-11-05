@@ -6,21 +6,23 @@ using System.Web.Mvc;
 using Ripple.Models;
 using Ripple.DAL;
 using Ripple.DAL.Interfaces;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace Ripple.Controllers
 {
     public class ResultsController : Controller
     {
         #region ctor
-        private IEventsContext db;
-
-        public ResultsController()
-        {
-            db = new EventsContext(); //faking DI for simplicty
-        }
-        public ResultsController(IEventsContext context)
-        {
+        private EventsContext db;
+        public ResultsController() { }       
+        public ResultsController(EventsContext context)
+        {            
             db = context;
+        }
+        public EventsContext EventsDBContext
+        {   
+            get { return db ?? System.Web.HttpContext.Current.GetOwinContext().Get<EventsContext>(); }
+            private set { db = value; }
         }
         #endregion
 
@@ -33,9 +35,13 @@ namespace Ripple.Controllers
 
         [HttpPost]
         public ActionResult Index(string search)
-        {
-            var events = db.GetEvents; //Because of the nature of our datasource we need a getter. 
-            var searchresults = events.Where(a => a.Description.Contains(search)).Select(a => a);
+        {   
+            
+            var searchresults = EventsDBContext.Events.Where(a => a.Description.Contains(search) || 
+                                    a.Category.Contains(search) || 
+                                    a.City.Contains(search) || 
+                                    a.Venue.Contains(search))                                    
+                                .Select(a => a);
             
             ViewBag.SearchTerm = search;
             return View(searchresults);

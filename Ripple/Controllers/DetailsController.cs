@@ -5,28 +5,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Owin;
+using Microsoft.Owin;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace Ripple.Controllers
 {
     public class DetailsController : Controller
     {
         #region ctor
-        private IEventsContext db;
-
-        public DetailsController()
-        {
-            db = new EventsContext(); //faking DI for simplicty
-        }
-        public DetailsController(IEventsContext context)
+        private EventsContext db;
+        public DetailsController() { }
+        public DetailsController(EventsContext context)
         {
             db = context;
+        }
+        public EventsContext EventsDBContext
+        {
+            get { return db ?? System.Web.HttpContext.Current.GetOwinContext().Get<EventsContext>(); }
+            private set { db = value; }
         }
         #endregion
        
         public ActionResult Index(string search)
-        {
-            var events = db.GetEvents; //Because of the nature of our datasource we need a getter. 
-            var searchresults = events.Where(a => a.Description.Contains(search)).Select(a => a);
+        {            
+            var searchresults = EventsDBContext.Events.Where(a => a.Description.Contains(search)).Select(a => a);
 
             ViewBag.SearchTerm = search;
             return View(searchresults);

@@ -12,6 +12,6 @@ namespace Ripple.DAL.Interfaces
     /// </summary>
     public interface IEventsContext
     {
-        IEnumerable<Events> GetEvents { get; }
+        IList<Events> Events { get; }
     }
 }
