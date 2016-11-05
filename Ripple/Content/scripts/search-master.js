@@ -4,11 +4,23 @@
  * @link https://github.com/bdm4/Ripple-Web-Search/
  * @author Ben Margevicius
  * Copyright 2016.  licensed.
- * Built: Fri Nov 04 2016 17:18:02 GMT-0400 (Eastern Daylight Time).
+ * Built: Sat Nov 05 2016 14:30:24 GMT-0400 (Eastern Daylight Time).
  */
+function initsearch()
+{
 
+}
+function initresults() {
+  
+}
+function initdetails()
+{
 
-
+}
 $(function () {
     console.log("I am running jquery: ", $.fn.jquery);
+
+    initsearch();
+    initresults();
+    initdetails();
 });
