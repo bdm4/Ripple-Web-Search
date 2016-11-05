@@ -7,6 +7,7 @@ using Ripple.Models;
 using Ripple.DAL;
 using Ripple.DAL.Interfaces;
 using Microsoft.AspNet.Identity.Owin;
+using Ripple.Services;
 
 namespace Ripple.Controllers
 {
@@ -34,16 +35,28 @@ namespace Ripple.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(string search)
-        {   
-            
-            var searchresults = EventsDBContext.Events.Where(a => a.Description.Contains(search) || 
-                                    a.Category.Contains(search) || 
-                                    a.City.Contains(search) || 
-                                    a.Venue.Contains(search))                                    
+        public ActionResult Index(string Search, Events EventFilter = null)
+        {              
+            if(String.IsNullOrEmpty(Search))
+            {
+                return View();
+            }
+
+            var searchresults = EventsDBContext.Events.Where(a => a.Description.Contains(Search) || 
+                                    a.Category.Contains(Search) || 
+                                    a.City.Contains(Search) || 
+                                    a.Venue.Contains(Search))                                    
                                 .Select(a => a);
-            
-            ViewBag.SearchTerm = search;
+
+            var service = new FilterResultsService();
+            searchresults = service.FilterResults(searchresults, EventFilter);
+
+            ViewBag.Category = EventFilter.Category;
+            ViewBag.StartDate = EventFilter.StartDate;
+            ViewBag.EndDate = EventFilter.EndDate;
+            ViewBag.City = EventFilter.City;
+            ViewBag.Venue = EventFilter.Venue;
+            ViewBag.SearchTerm = Search; //We pass this back to show in the partial form view 
             return View(searchresults);
         }
     }

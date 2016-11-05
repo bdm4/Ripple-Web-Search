@@ -8,27 +8,47 @@
     @Html.Partial("~/Views/Shared/_EventsSearchForm.cshtml")
 </div>
 
-<a id="AdvancedSearchLink" href="#AdvancedSearchForm" data-toggle="collapse">Advanced Search</a>
+<a id="AdvancedSearchLink" href="#AdvancedSearchForm" data-toggle="collapse">Filter Results</a>
 <div id="AdvancedSearchForm" class="collapse">
-    <form>
+    @using (@Html.BeginForm("Index", "Results", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        <input type="hidden" name="Search" value="@ViewBag.SearchTerm" />
         <div class="form-group">
-            <input type="text" name="Category" />
+            <label for="CatTxt" class="col-sm-1 control-label">Category</label>
+            <div class="col-sm-11">
+                <input type="text" name="Category" id="CatTxt" value="@ViewBag.Category"  />
+            </div>
         </div>
         <div class="form-group">
-            <input type="text" name="StartDate" />
-            <input type="text" name="EndDate" />
-       </div>
-        <div class="form-group">
-            <input type="text" name="City" />
+            <label for="StartDateTxt" class="col-sm-1 control-label">Start Date</label>
+            <div class="col-sm-11">
+                <input type="text" name="StartDate" id="StartDateTxt" value="@ViewBag.StartDate" />
+            </div>
         </div>
         <div class="form-group">
-            <input type="text" name="Venue" />
+            <label for="EndDateTxt" class="col-sm-1 control-label">End Date</label>
+            <div class="col-sm-11">
+                <input type="text" name="EndDate" id="EndDateTxt" value="@ViewBag.EndDate" />
+            </div>
         </div>
-</form>
+        <div class="form-group">
+            <label for="CityTxt" class="col-sm-1 control-label">City</label>
+            <div class="col-sm-11">
+                <input type="text" name="City" id="CityTxt" value="@ViewBag.City" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="VenueTxt" class="col-sm-1 control-label">Venue</label>
+            <div class="col-sm-11">
+                <input type="text" name="Venue" id="VenueTxt" value="@ViewBag.Venue" />
+            </div>
+        </div>
+        <button class="btn btn-default" type="submit">Filter Results</button>
+    }
 </div>
 <hr />
 
-@if (Model.Count() > 0)
+@if (Model != null && Model.Count() > 0)
 {
     for (int i = 0; i < Model.Count(); i++)
     {
@@ -52,3 +72,23 @@ else
 {
     <div>Sorry there are no results that match your search</div>
 }      
+
+@section scripts {    
+    <script src="~/Libs/jquery-maskedinput/js/jquery.maskedinput.js"></script>
+    <script>
+        $(function () {
+            $("#StartDateTxt, #EndDateTxt").mask("99/99/9999");
+
+            var CategoryFilter = '@ViewBag.Category';
+            var StartDateFilter = '@ViewBag.StartDate';
+            var EndDateFilter = '@ViewBag.EndDate';
+            var CityFilter = '@ViewBag.City';
+            var VenueFilter = '@ViewBag.Venue';
+
+            if(CategoryFilter || StartDateFilter || EndDateFilter || CityFilter || VenueFilter)
+            {
+                //toggle advanced
+            }
+        });
+    </script>
+}

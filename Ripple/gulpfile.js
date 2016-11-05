@@ -54,6 +54,12 @@ gulp.task('copy-libs', ['clean-libs'], function (callback) {
     gulp.src(["./node_modules/font-awesome/css/*.*"])
 		.pipe(gulp.dest(config.webroot + '/Libs/font-awesome/css'));
 
+    gulp.src(["./node_modules/font-awesome/css/*.*"])
+		.pipe(gulp.dest(config.webroot + '/Libs/font-awesome/css'));
+
+    gulp.src(["./node_modules/jquery.maskedinput/src/*.*"])
+		.pipe(gulp.dest(config.webroot + '/Libs/jquery-maskedinput/js'));
+
     callback();
     //return merge(jquery, tethercss, tetherjs, bootstrapcss, bootstrapjs, fafonts, facss); 
 });
