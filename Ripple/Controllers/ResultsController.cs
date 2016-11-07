@@ -35,44 +35,40 @@ namespace Ripple.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(string Search, Events EventFilter = null)
-        {              
-            if(String.IsNullOrEmpty(Search)) 
-            { 
-                return View(); //If search is empty return no results.
+        public ActionResult Index(Search Searchmodel)
+        {
+            if (ModelState.IsValid)
+            {
+                if (String.IsNullOrEmpty(Searchmodel.Keyword))
+                {
+                    return View(); //If search is empty return no results.
+                }
+
+                var searchresults = EventsDBContext.Events.Where(a => a.Description.Contains(Searchmodel.Keyword) ||
+                                       a.Category.Contains(Searchmodel.Keyword) ||
+                                       a.City.Contains(Searchmodel.Keyword) ||
+                                       a.Venue.Contains(Searchmodel.Keyword))
+                                       .Select(a => a);
+
+                //If the keyword looks like a date we'll query that.
+                if (Searchmodel.StartDate.HasValue)
+                {
+                    searchresults = searchresults.Where(d => d.StartDate >= Searchmodel.StartDate);
+                }
+                //The search design was to be greedy with filtering available to the user. So all initial searched are by keywords in the filterable inputs.
+                var service = new FilterResultsService(); //This service is designed to filter results of a keywords query.
+                searchresults = service.FilterResults(searchresults, Searchmodel);
+
+                //Use ViewData to persist Search state            
+                ViewBag.Category = Searchmodel.Category;
+                ViewBag.StartDate = Searchmodel.StartDate;
+                ViewBag.City = Searchmodel.City;
+                ViewBag.Venue = Searchmodel.Venue;
+                //We pass this back to show in the partial form view and filter form inputs.
+                ViewBag.SearchTerm = Searchmodel.Keyword;
+                return View(searchresults);
             }
-
-            var searchresults = EventsDBContext.Events
-                                .Select(a => a);
-
-
-            //If the keyword looks like a date we'll query that.
-            DateTime datesearch;
-            if(DateTime.TryParse(Search, out datesearch))
-            {
-                searchresults = searchresults.Where(d => d.StartDate >= datesearch);
-            }      
-            else //else if the keyword looks like a string then we'll search everything filterable
-            {
-                searchresults = searchresults.Where(a => a.Description.Contains(Search) ||
-                                   a.Category.Contains(Search) ||
-                                   a.City.Contains(Search) ||
-                                   a.Venue.Contains(Search));
-            }     
-            //The search design was to be greedy with filtering available to the user. So all initial searched are by keywords in the filterable inputs.
-            var service = new FilterResultsService(); //This service is designed to filter results of a keywords query.
-            searchresults = service.FilterResults(searchresults, EventFilter);
-
-
-            ViewData["Category"] = EventFilter.Category; 
-            //We pass this back to show in the partial form view and filter form inputs.
-            
-            ViewBag.StartDate = EventFilter.StartDate;
-            ViewBag.EndDate = EventFilter.EndDate;
-            ViewBag.City = EventFilter.City;
-            ViewBag.Venue = EventFilter.Venue;
-            ViewBag.SearchTerm = Search; 
-            return View(searchresults);
+            return View();
         }
     }
 }

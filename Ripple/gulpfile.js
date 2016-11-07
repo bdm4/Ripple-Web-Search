@@ -1,3 +1,4 @@
+/// <binding BeforeBuild='default' />
 var gulp = require('gulp'),
 	del = require('del'),
 	chalk = require('chalk'),

@@ -8,7 +8,7 @@ namespace Ripple.Services
 {
     public class FilterResultsService
     {
-        public IEnumerable<Events> FilterResults (IEnumerable<Events> Events, Events EventFilter)
+        public IEnumerable<Events> FilterResults (IEnumerable<Events> Events, Search EventFilter)
         {
             if (!String.IsNullOrEmpty(EventFilter.Category))
                 Events = Events.Where(a => a.Category.Contains(EventFilter.Category)).Select(a => a);

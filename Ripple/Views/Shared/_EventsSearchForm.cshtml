@@ -1,11 +1,34 @@
 ﻿
 
 <a href="@Url.Action("Index", "Search")" class="search-header">Search Events</a> 
-<form action="~/Results/" method="post">
-    <div class="input-group">
-        <input type="text" name="search" class="form-control" placeholder="Search Events..." value="@ViewBag.SearchTerm">
-        <span class="input-group-btn">
-            <button class="btn btn-default" type="submit"><span class="fa fa-search"></span></button>
-        </span>
-    </div><!-- /input-group -->
-</form>
+@using (Html.BeginForm("Index", "Results", FormMethod.Post))
+{
+    <div class="form-group">
+        <div class="input-group">
+            <input type="text" name="Keyword" class="form-control" placeholder="Search Events..." value="@ViewBag.SearchTerm">
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="submit"><span class="fa fa-search"></span></button>
+            </span>
+        </div><!-- /input-group -->
+    </div>
+    <a id="AdvancedSearchLink" href="#AdvancedSearchForm" data-toggle="collapse">Filter Results</a>
+    <div id="AdvancedSearchForm" class="collapse">
+        <div class="form-group">
+            <label for="CatTxt">Category</label>
+            <input type="text" name="Category" id="CatTxt" value="@ViewBag.Category" />
+        </div>
+        <div class="form-group">
+            <label for="StartDateTxt">Start Date</label>
+            <input type="text" name="StartDate" id="StartDateTxt" value="@ViewBag.StartDate" />
+        </div>
+        <div class="form-group">
+            <label for="CityTxt">City</label>
+            <input type="text" name="City" id="CityTxt" value="@ViewBag.City" />
+        </div>
+        <div class="form-group">
+            <label for="VenueTxt">Venue</label>
+            <input type="text" name="Venue" id="VenueTxt" value="@ViewBag.Venue" />
+        </div>
+        <button class="btn btn-default" type="submit">Filter Results</button>
+    </div>
+}

@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Ripple.Models.Events>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Search Results";
 }
 <div class="floating-content-block">
 
@@ -9,38 +9,7 @@
         @Html.Partial("~/Views/Shared/_EventsSearchForm.cshtml")
     </div>
 
-    <a id="AdvancedSearchLink" href="#AdvancedSearchForm" data-toggle="collapse">Filter Results</a>
-    <div id="AdvancedSearchForm" class="collapse">
-        @using (@Html.BeginForm("Index", "Results", FormMethod.Post, new { @class = "form-horizontal" }))
-        {
-            <input type="hidden" name="Search" value="@ViewBag.SearchTerm" />
-            <div class="form-group">
-                <label for="CatTxt" class="col-sm-1 control-label">Category</label>
-                <div class="col-sm-11">
-                    <input type="text" name="Category" id="CatTxt" value="@ViewBag.Category" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="StartDateTxt" class="col-sm-1 control-label">Start Date</label>
-                <div class="col-sm-11">
-                    <input type="text" name="StartDate" id="StartDateTxt" value="@ViewBag.StartDate" />
-                </div>
-            </div>           
-            <div class="form-group">
-                <label for="CityTxt" class="col-sm-1 control-label">City</label>
-                <div class="col-sm-11">
-                    <input type="text" name="City" id="CityTxt" value="@ViewBag.City" />
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="VenueTxt" class="col-sm-1 control-label">Venue</label>
-                <div class="col-sm-11">
-                    <input type="text" name="Venue" id="VenueTxt" value="@ViewBag.Venue" />
-                </div>
-            </div>
-            <button class="btn btn-default" type="submit">Filter Results</button>
-        }
-    </div>
+  
     <hr />
 
     @if (Model != null && Model.Count() > 0)
@@ -50,12 +19,27 @@
             var evnt = Model.ElementAt(key);
             <div class="media">
                 <div class="media-left">
-                    <a href="@Url.Action("View", "Details", new { Search=ViewBag.SearchTerm, StartDate = evnt.StartDate, Title = evnt.Title, Time=evnt.Time })">
+                    @* There is another way to do this. I just wanted to show getting and posting with MVC as a demo, *@
+                    <a href="@Url.Action("View", "Details", new { SearchTerm=ViewBag.SearchTerm,
+                            Category = ViewBag.Category,
+                            StartDateFilter = ViewBag.StartDate,
+                            City = ViewBag.City,
+                            Venue = ViewBag.Venue,
+                            StartDate = evnt.StartDate, //The following is a compound key for and evente
+                            Title = evnt.Title,
+                            Time =evnt.Time })">
                         <img class="media-object" src="//placehold.it/64x64" alt="@evnt.Description" />
                     </a>
                 </div>
                 <div class="media-body">
-                    <h4 class="media-heading"><a href="@Url.Action("View", "Details",  new { Search = ViewBag.SearchTerm, StartDate = evnt.StartDate, Title = evnt.Title, Time=evnt.Time })">@evnt.Title</a></h4>
+                    <h4 class="media-heading"><a href=@Url.Action("View", "Details", new { SearchTerm=ViewBag.SearchTerm,
+                            Category = ViewBag.Category,
+                            StartDateFilter = ViewBag.StartDate,
+                            City = ViewBag.City,
+                            Venue = ViewBag.Venue,
+                            StartDate = evnt.StartDate, //The following is a compound key for and evente
+                            Title = evnt.Title,
+                            Time =evnt.Time })>@evnt.Title</a></h4>
                     <p>
                         @evnt.Description
                     </p>
@@ -70,23 +54,16 @@
 
 </div>   
 
-@section scripts {    
-    <script src="~/Libs/jquery-maskedinput/js/jquery.maskedinput.js"></script>
+@section scripts {        
     <script>
         $(function () {
-            $("#StartDateTxt, #EndDateTxt").mask("99/99/9999");
-
-            var CategoryFilter = '@ViewBag.Category';
-            var StartDateFilter = '@ViewBag.StartDate';
-            var EndDateFilter = '@ViewBag.EndDate';
-            var CityFilter = '@ViewBag.City';
-            var VenueFilter = '@ViewBag.Venue';
-
-            if(CategoryFilter || StartDateFilter || EndDateFilter || CityFilter || VenueFilter)
-            {
-                //toggle advanced                
-                $('#AdvancedSearchForm').collapse('show'); 
+            var filters = {
+                Category: '@ViewBag.Category',
+                StartDate: '@ViewBag.StartDate',
+                City: '@ViewBag.City',
+                Venue: '@ViewBag.Venue'
             }
+            initFilters(filters);
         });
     </script>
 }

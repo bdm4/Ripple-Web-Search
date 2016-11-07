@@ -1,10 +1,12 @@
 ﻿@model Ripple.Models.Events
 
 @{
-    ViewBag.Title = "View";
+    ViewBag.Title = "Details";
 }
 
 <div class="floating-content-block">
+    @Html.Partial("~/Views/Shared/_EventsSearchForm.cshtml")
+
     <h4>@Html.DisplayFor(model => model.Title)</h4>
     <hr />
     <dl class="dl-horizontal">
@@ -114,11 +116,30 @@
 
     </dl>
     <p>
-        @using (@Html.BeginForm("Index", "Results", FormMethod.Post, new { @class = "form-horizontal" }))
+        @using (@Html.BeginForm("Index", "Results", FormMethod.Post))
         {
-            <input type="hidden" name="Search" value="@ViewBag.SearchTerm" />
+            <input type="hidden" name="Keyword" value="@ViewBag.SearchTerm" />
+            <input type="hidden" name="Category" value="@ViewBag.Category" />
+            <input type="hidden" name="StartDate" value="@ViewBag.StartDate" />
+            <input type="hidden" name="City" value="@ViewBag.City" />
+            <input type="hidden" name="Venue" value="@ViewBag.Venue" />
             <button class="btn btn-default" type="submit">Back to Results</button>
         }       
     </p>
 </div>
+
+@section scripts {
+    
+    <script>
+        $(function () {
+            var filters = {
+                Category: '@ViewBag.Category',
+                StartDate: '@ViewBag.StartDate',
+                City: '@ViewBag.City',
+                Venue: '@ViewBag.Venue'
+            }
+            initFilters(filters);
+        });
+    </script>
+}
 
