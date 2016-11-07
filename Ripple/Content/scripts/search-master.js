@@ -4,7 +4,7 @@
  * @link https://github.com/bdm4/Ripple-Web-Search/
  * @author Ben Margevicius
  * Copyright 2016.  licensed.
- * Built: Mon Nov 07 2016 12:49:25 GMT-0500 (Eastern Standard Time).
+ * Built: Mon Nov 07 2016 13:00:13 GMT-0500 (Eastern Standard Time).
  */
 function initFilters(filters)
 {
@@ -17,7 +17,8 @@ function initFilters(filters)
     console.log("here", filters);
 
     if (CategoryFilter || StartDateFilter || CityFilter || VenueFilter) {
-        $('#AdvancedSearchForm').collapse('show'); //This is kind of irritating... Everytime it reloads it does the collapse animation.. 
+        //$('#AdvancedSearchForm').collapse('show'); //This is kind of irritating... Everytime it reloads it does the collapse animation..
+        $('#AdvancedSearchForm').addClass('in');
     }
 }
 function initresults() {
