@@ -6,8 +6,7 @@
     var StartDateFilter = filters.StartDate;
     var CityFilter = filters.City;
     var VenueFilter = filters.Venue;
-    console.log("here", filters);
-
+   
     if (CategoryFilter || StartDateFilter || CityFilter || VenueFilter) {
         //$('#AdvancedSearchForm').collapse('show'); //This is kind of irritating... Everytime it reloads it does the collapse animation..
         $('#AdvancedSearchForm').addClass('in'); //this is better but still offers a small UFOC...
