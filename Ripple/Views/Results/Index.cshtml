@@ -25,13 +25,7 @@
                 <div class="col-sm-11">
                     <input type="text" name="StartDate" id="StartDateTxt" value="@ViewBag.StartDate" />
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="EndDateTxt" class="col-sm-1 control-label">End Date</label>
-                <div class="col-sm-11">
-                    <input type="text" name="EndDate" id="EndDateTxt" value="@ViewBag.EndDate" />
-                </div>
-            </div>
+            </div>           
             <div class="form-group">
                 <label for="CityTxt" class="col-sm-1 control-label">City</label>
                 <div class="col-sm-11">
@@ -90,7 +84,8 @@
 
             if(CategoryFilter || StartDateFilter || EndDateFilter || CityFilter || VenueFilter)
             {
-                //toggle advanced
+                //toggle advanced                
+                $('#AdvancedSearchForm').collapse('show'); 
             }
         });
     </script>

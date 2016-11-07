@@ -42,18 +42,31 @@ namespace Ripple.Controllers
                 return View(); //If search is empty return no results.
             }
 
-            //The search design was to be greedy with filtering available to the user. So all initial searched are by keywords in the filterable inputs.
-            var searchresults = EventsDBContext.Events.Where(a => a.Description.Contains(Search) || 
-                                    a.Category.Contains(Search) || 
-                                    a.City.Contains(Search) || 
-                                    a.Venue.Contains(Search))                                    
+            var searchresults = EventsDBContext.Events
                                 .Select(a => a);
 
+
+            //If the keyword looks like a date we'll query that.
+            DateTime datesearch;
+            if(DateTime.TryParse(Search, out datesearch))
+            {
+                searchresults = searchresults.Where(d => d.StartDate >= datesearch);
+            }      
+            else //else if the keyword looks like a string then we'll search everything filterable
+            {
+                searchresults = searchresults.Where(a => a.Description.Contains(Search) ||
+                                   a.Category.Contains(Search) ||
+                                   a.City.Contains(Search) ||
+                                   a.Venue.Contains(Search));
+            }     
+            //The search design was to be greedy with filtering available to the user. So all initial searched are by keywords in the filterable inputs.
             var service = new FilterResultsService(); //This service is designed to filter results of a keywords query.
             searchresults = service.FilterResults(searchresults, EventFilter);
 
+
+            ViewData["Category"] = EventFilter.Category; 
             //We pass this back to show in the partial form view and filter form inputs.
-            ViewBag.Category = EventFilter.Category;
+            
             ViewBag.StartDate = EventFilter.StartDate;
             ViewBag.EndDate = EventFilter.EndDate;
             ViewBag.City = EventFilter.City;
