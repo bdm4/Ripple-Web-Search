@@ -43,8 +43,9 @@ namespace Ripple.Controllers
                 {
                     return View(); //If search is empty return no results.
                 }
-                var lowercasekey = Searchmodel.Keyword.ToLower();
+                var lowercasekey = Searchmodel.Keyword.ToLower(); //change our keyword search to lower case
 
+                //Get a keyword search base, this is a greedy search
                 var searchresults = EventsDBContext.Events.Where(a => a.Description.ToLower().Contains(lowercasekey) ||
                                        a.Category.ToLower().Contains(lowercasekey) ||
                                        a.City.ToLower().Contains(lowercasekey) ||
