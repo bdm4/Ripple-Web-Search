@@ -43,11 +43,12 @@ namespace Ripple.Controllers
                 {
                     return View(); //If search is empty return no results.
                 }
+                var lowercasekey = Searchmodel.Keyword.ToLower();
 
-                var searchresults = EventsDBContext.Events.Where(a => a.Description.Contains(Searchmodel.Keyword) ||
-                                       a.Category.Contains(Searchmodel.Keyword) ||
-                                       a.City.Contains(Searchmodel.Keyword) ||
-                                       a.Venue.Contains(Searchmodel.Keyword))
+                var searchresults = EventsDBContext.Events.Where(a => a.Description.ToLower().Contains(lowercasekey) ||
+                                       a.Category.ToLower().Contains(lowercasekey) ||
+                                       a.City.ToLower().Contains(lowercasekey) ||
+                                       a.Venue.ToLower().Contains(lowercasekey))
                                        .Select(a => a);
 
                 //If the keyword looks like a date we'll query that.

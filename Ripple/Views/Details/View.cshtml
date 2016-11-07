@@ -132,13 +132,14 @@
     
     <script>
         $(function () {
+            //If you want to show the filters on the details page uncomment below
             var filters = {
                 Category: '@ViewBag.Category',
                 StartDate: '@ViewBag.StartDate',
                 City: '@ViewBag.City',
                 Venue: '@ViewBag.Venue'
             }
-            initFilters(filters);
+            //initFilters(filters);
         });
     </script>
 }
